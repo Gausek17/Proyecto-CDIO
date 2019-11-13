@@ -16,7 +16,11 @@
 
 
 //Sensor Temperatura
-
+ const double PUNTO_CORTE=0.79;  // Valor de punto de corte con el eje de ordenadas (0Y)
+ const double VALOR_PENDIENTE=0.033;  // Valor de la pendiente
+ const double INCREMENTO_T=2.23; //Diferencia entre la temperatura teórica y la del ambiente
+ const int MV_MAXIMO=4096;
+ const int BITS_MINIMO=32767;
 
 void setup() {
   
@@ -33,6 +37,15 @@ void setup() {
 void loop() {
 	int resSal;
     int resHumedad;
+    int resTemperatura;
+
+
+    resTemperatura = leerTemperatura( PUNTO_CORTE, VALOR_PENDIENTE, INCREMENTO_T, MV_MAXIMO, BITS_MINIMO);
+    
+    
+    Serial.print("La temperatura es: ");
+    Serial.print(resTemperatura);
+    Serial.println("ºC");
 
     resSal= leerSalinidad( MEDICIONES_SALINIDAD,  POWER_PIN_SAL, miSensor, PIN_ADC_SAL, MIN_SALINIDAD ,MAX_SALINIDAD);
     Serial.print("El nivel de salinidad es del " );
