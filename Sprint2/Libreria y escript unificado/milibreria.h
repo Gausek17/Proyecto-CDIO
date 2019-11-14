@@ -1,4 +1,4 @@
-﻿
+
 #include <Wire.h>
 #include <Adafruit_ADS1015.h>
 
@@ -53,3 +53,20 @@ int leerHumedad(Adafruit_ADS1115 miSensor,int pinAdc, int AirValue, int WaterVal
   }
   return humedad;
 }//leerHumedad()
+
+//Funcion leer temperatura
+double leerTemperatura(Adafruit_ADS1115 miSensor,int pinAdc, double b, double m, double incrementoT, int mvMaximo, int bitsMinimo){
+
+ 
+	int16_t adc0; // entero mas pequeño 16 bits soportables
+	int16_t temperatura; // declaramos la variable humedad
+	double voltajeReal;
+	adc0 = miSensor.readADC_SingleEnded(pinAdc);//dice de que pin del adc va a coger la información
+
+	voltajeReal=(adc0*mvMaximo)/bitsMinimo;
+	voltajeReal=voltajeReal/1000;
+	temperatura = incrementoT+(voltajeReal-b)/m;
+ 
+ return temperatura;
+}
+ 
