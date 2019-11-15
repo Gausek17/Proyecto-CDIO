@@ -1,5 +1,4 @@
-
-#include <Wire.h>
+﻿#include <Wire.h>
 #include <Adafruit_ADS1015.h>
 
 //Función para leer salinidad
