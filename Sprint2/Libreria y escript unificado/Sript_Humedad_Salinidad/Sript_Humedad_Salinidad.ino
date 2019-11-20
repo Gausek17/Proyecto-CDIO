@@ -1,6 +1,8 @@
 //Incluimos las bibliotecas
   #include "milibreria.h"
   
+  
+  
 const int SLEEP_TIME_S=20;
 
 //Sensor salinidad
@@ -24,7 +26,7 @@ const int SLEEP_TIME_S=20;
  const int MV_MAXIMO=4096;
  const int BITS_MINIMO=32767;
  const int PIN_ADC_TEMPERATUA=2;
-
+  const int  PIN_LED_TEMPERATURA= 0; //le damos nombre al pin 0
 void setup() {
   
 	Serial.begin(9600);
@@ -32,7 +34,8 @@ void setup() {
   delay(1000);
  	pinMode(POWER_PIN_SAL, OUTPUT);	//seleccionar el pin por donde saldrá el voltaje
  	miSensor.setGain(GAIN_ONE);		//seleccionar el rango en el que establecerá las medidas de V
-	
+
+ 
 	Serial.println("Rango del ADC: +/- 4.096V (1 bit=2mV)");
   
 
@@ -59,6 +62,10 @@ void loop() {
     Serial.println(" %");
     //Hibernar la placa
    // ESP.deepSleep(SLEEP_TIME_S*1000000);
-    delay(1000);
+    //delay(1000);
+
+   //llamo a la funcion de enchufarLed
+   enchufarLed( PIN_LED_TEMPERATURA, resTemperatura);
+   
 
 }//loop

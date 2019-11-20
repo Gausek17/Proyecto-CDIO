@@ -68,4 +68,15 @@ double leerTemperatura(Adafruit_ADS1115 miSensor,int pinAdc, double b, double m,
  
  return temperatura;
 }
- 
+
+
+//Activacion del led
+void enchufarLed(int pinLed,double temperatura){
+ if(temperatura>30){
+  Serial.print("---------------------------------" );
+  digitalWrite( pinLed, LOW ); //Atenuar PIN
+  digitalWrite(pinLed,HIGH);
+ }else{
+  digitalWrite( pinLed, LOW );
+ }
+}
