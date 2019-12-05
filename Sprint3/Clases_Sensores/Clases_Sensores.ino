@@ -2,10 +2,12 @@
 
 #include <Wire.h>
 #include <Adafruit_ADS1015.h>
+#include <ESP8266WiFi.h>
 #include "sensor_humedad.h";
 #include "sensor_salinidad.h";
 #include "sensor_temperatura.h";
-#include "sensor_iluminacion.h"
+#include "sensor_iluminacion.h";
+#include "wifi.h";
 
 
 //Sensor humedad
@@ -51,6 +53,7 @@ void setup() {
   sensorSalinidad = SensorSalinidad(PIN_ADC_SAL, MEDICIONES_SALINIDAD, POWER_PIN_SAL, MAX_SALINIDAD, MIN_SALINIDAD, miSensor);
   sensorTemperatura = SensorTemperatura(PIN_ADC_TEMPERATUA, PUNTO_CORTE, VALOR_PENDIENTE, INCREMENTO_T, MV_MAXIMO, BITS_MAXIMO, miSensor);
   sensorIluminacion = SensorIluminacion(PIN_ADC_ILUMINACION, MV_MAXIMO, BITS_MAXIMO, miSensor );
+  connectWiFi();
 }//setup
 
 void loop() {
@@ -80,6 +83,19 @@ void loop() {
   Serial.print("La iluminacion es:");
   Serial.print(resIluminacion);
   Serial.println(" %");
+
+  String data[ NUM_FIELDS_TO_SEND + 1];  // Podemos enviar hasta 8 datos
+
+
+  data[ 1 ] = String(resSal); //Escribimos el dato 1. Recuerda actualizar numFields
+
+  data[ 2 ] = String( resIluminacion); //Escribimos el dato 2. Recuerda actualizar numFields
+
+  data[ 3 ] = String( resTemperatura);
+
+  data[ 4 ] = String( resHumedad);
+
+  HTTPGet( data, NUM_FIELDS_TO_SEND );
 
 
 
