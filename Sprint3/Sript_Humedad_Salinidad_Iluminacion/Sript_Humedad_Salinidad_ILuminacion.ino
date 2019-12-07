@@ -51,7 +51,7 @@ void loop() {
     Serial.print("La iluminacion es:");
     Serial.print(resIluminacion);
     Serial.println(" %");
-    
+    delay(1000);
     /*
     resTemperatura = leerTemperatura(miSensor,PIN_ADC_TEMPERATUA, PUNTO_CORTE, VALOR_PENDIENTE, INCREMENTO_T, MV_MAXIMO, BITS_MINIMO);
     

@@ -1,6 +1,6 @@
 // Comentar/Descomentar para ver mensajes de depuracion en monitor serie y/o respuesta del HTTP server
-//#define PRINT_DEBUG_MESSAGES
-//#define PRINT_HTTP_RESPONSE
+#define PRINT_DEBUG_MESSAGES
+#define PRINT_HTTP_RESPONSE
 
 // Comentar/Descomentar para conexion Fuera/Dentro de UPV
 //#define WiFi_CONNECTION_UPV
@@ -16,8 +16,8 @@
   const char WiFiSSID[] = "GTI1";
   const char WiFiPSK[] = "1PV.arduino.Toledo";
 #else //Conexion fuera de la UPV
-  const char WiFiSSID[] = "Leire07";
-  const char WiFiPSK[] = "wifiarduino";
+  const char WiFiSSID[] = "MOVISTAR_4460";
+  const char WiFiPSK[] = "4WF3w9JMJzRWXyMw7J77";
 #endif
 
 ///////////////////////////////////////////////////////
@@ -50,7 +50,7 @@ WiFiClient client;
   String MyWriteAPIKey="cdiocurso2019g06"; // Escribe la clave de tu canal Dweet
 #endif
 
-#define NUM_FIELDS_TO_SEND 4 //Numero de medidas a enviar al servidor REST (Entre 1 y 8)
+#define NUM_FIELDS_TO_SEND 7 //Numero de medidas a enviar al servidor REST (Entre 1 y 8)
 
 const int LED_PIN = 5; // Thing's onboard, green LED
 

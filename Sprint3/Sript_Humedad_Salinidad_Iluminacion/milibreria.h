@@ -85,5 +85,12 @@ double leerIluminacion(Adafruit_ADS1115 miSensor, int pinAdc,int MV_MAXIMO, int 
   voltajeReal=(adc0*MV_MAXIMO)/BITS_MINIMO;
     voltajeReal=voltajeReal/1000;
 double porcentajeVoltaje=(voltajeReal*100)/3.64;
- return porcentajeVoltaje;
+  if (porcentajeVoltaje>100){
+    porcentajeVoltaje=100.0;
+  }
+   if (porcentajeVoltaje<0){
+    porcentajeVoltaje=0.0;
+    
+   }
+   return porcentajeVoltaje;
 }
