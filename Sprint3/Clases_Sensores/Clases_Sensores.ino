@@ -64,12 +64,12 @@ void setup() {
   sensorSalinidad = SensorSalinidad(PIN_ADC_SAL, MEDICIONES_SALINIDAD, POWER_PIN_SAL, MAX_SALINIDAD, MIN_SALINIDAD, miSensor);
   sensorTemperatura = SensorTemperatura(PIN_ADC_TEMPERATUA, PUNTO_CORTE, VALOR_PENDIENTE, INCREMENTO_T, MV_MAXIMO, BITS_MAXIMO, miSensor);
   sensorIluminacion = SensorIluminacion(PIN_ADC_ILUMINACION, MV_MAXIMO, BITS_MAXIMO, miSensor );
-  acelerometro= SensorAcelerometro(MPU9250_ADDRESS ,REGISTRO,ACC_FULL_SCALE_16_G ,CALIBRACION_ACX);
+  acelerometro = SensorAcelerometro(MPU9250_ADDRESS , REGISTRO, ACC_FULL_SCALE_16_G , CALIBRACION_ACX);
   connectWiFi();
 }//setup
 
 void loop() {
-  
+
   int resHumedad;
   int resSal;
   double resTemperatura;
@@ -100,31 +100,32 @@ void loop() {
 
   acelerometro.getAceleracion(&datosAceleracion[0]);
   Serial.println("Lectura Acelerometro");
-   Serial.print("AX=");
-   Serial.print(datosAceleracion[0] , 2 );
-   Serial.print("g");
-   Serial.print("\t");
-   Serial.print("AY=");
-   Serial.print(datosAceleracion[1], 2);
-   Serial.print("g");
-   Serial.print("\t");
-   Serial.print("AZ=");
-   Serial.print(datosAceleracion[2], 2);
-   Serial.println("g");
+  Serial.print("AX=");
+  Serial.print(datosAceleracion[0] , 2 );
+  Serial.print("g");
+  Serial.print("\t");
+  Serial.print("AY=");
+  Serial.print(datosAceleracion[1], 2);
+  Serial.print("g");
+  Serial.print("\t");
+  Serial.print("AZ=");
+  Serial.print(datosAceleracion[2], 2);
+  Serial.println("g");
 
-  /*String data[ NUM_FIELDS_TO_SEND + 1];  // Podemos enviar hasta 8 datos
+  String data[ NUM_FIELDS_TO_SEND + 1];  // Podemos enviar hasta 8 datos
 
+  //Escribimos los datos dentro de Data
+  data[ 1 ] = String(resHumedad);
+  data[ 2 ] = String(resSal);
+  data[ 3 ] = String(resIluminacion);
+  data[ 4 ] = String(resTemperatura);
+  data[ 5 ] = String(datosAceleracion[0]);
+  data[ 6 ] = String(datosAceleracion[1]);
+  data[ 7 ] = String(datosAceleracion[2]);
 
-  data[ 1 ] = String(resSal); //Escribimos el dato 1. Recuerda actualizar numFields
-
-  data[ 2 ] = String( resIluminacion); //Escribimos el dato 2. Recuerda actualizar numFields
-
-  data[ 3 ] = String( resTemperatura);
-
-  data[ 4 ] = String( resHumedad);
 
   HTTPGet( data, NUM_FIELDS_TO_SEND );
-*/
-delay(2000);
+
+  delay(2000);
 
 }//loop

@@ -1,5 +1,14 @@
+// Comentar/Descomentar para ver mensajes de depuracion en monitor serie y/o respuesta del HTTP server
+//#define PRINT_DEBUG_MESSAGES
+//#define PRINT_HTTP_RESPONSE
 
-#define REST_SERVER_THINGSPEAK 
+// Comentar/Descomentar para conexion Fuera/Dentro de UPV
+//#define WiFi_CONNECTION_UPV
+
+// Selecciona que servidor REST quieres utilizar entre ThingSpeak y Dweet
+#define REST_SERVER_THINGSPEAK //Selecciona tu canal para ver los datos en la web (https://thingspeak.com/channels/360979)
+//#define REST_SERVER_DWEET //Selecciona tu canal para ver los datos en la web (http://dweet.io/follow/PruebaGTI)
+
 
 
 //Define Wifi
@@ -35,7 +44,7 @@ WiFiClient client;
 
 #ifdef REST_SERVER_THINGSPEAK 
   const char Rest_Host[] = "api.thingspeak.com";
-  String MyWriteAPIKey="YLQC7TY6DLXJZG6G"; // Escribe la clave de tu canal ThingSpeak
+  String MyWriteAPIKey="1S2BPQKWQXMQYDOM"; // Escribe la clave de tu canal ThingSpeak
 #else 
   const char Rest_Host[] = "dweet.io";
   String MyWriteAPIKey="cdiocurso2019g06"; // Escribe la clave de tu canal Dweet
