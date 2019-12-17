@@ -16,8 +16,8 @@
   const char WiFiSSID[] = "GTI1";
   const char WiFiPSK[] = "1PV.arduino.Toledo";
 #else //Conexion fuera de la UPV
-  const char WiFiSSID[] = "MOVISTAR_4460";
-  const char WiFiPSK[] = "4WF3w9JMJzRWXyMw7J77";
+  const char WiFiSSID[] = "Albertito";
+  const char WiFiPSK[] = "cdio0006";
 #endif
 
 ///////////////////////////////////////////////////////
