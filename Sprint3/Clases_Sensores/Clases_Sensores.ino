@@ -15,7 +15,7 @@
 Adafruit_ADS1115 miSensor(0x48);        // Inicializar sensor en la address 0x48
 const int MIN_HUMEDAD = 20475;      //Medimos valor en seco
 const int MAX_HUMEDAD = 10115;      //Medimos valor en agua
-const int PIN_ADC_HUMEDAD = 0;
+const int PIN_ADC_HUMEDAD = 1;
 SensorHumedad sensorHumedad;
 
 
@@ -24,7 +24,7 @@ const int POWER_PIN_SAL = 5;              // Digital I/O pin, Global variable
 const int MAX_SALINIDAD = 20000;        //Medicion con una cantidad elevada de sal
 const int MIN_SALINIDAD = 8000;            //Medicion con poca cantidad de sal
 const int MEDICIONES_SALINIDAD = 20;    //Numero de MEDICIONES_SALINIDAD
-const int PIN_ADC_SAL = 1;
+const int PIN_ADC_SAL = 0;
 SensorSalinidad sensorSalinidad;
 
 //Sensor Temperatura
@@ -75,7 +75,7 @@ void loop() {
   double resTemperatura;
   double resIluminacion;
   float datosAceleracion[14];
-
+  
   resHumedad = sensorHumedad.getHumedad();
   Serial.print("El nivel de humedad es del " );
   Serial.print(resHumedad);
@@ -97,6 +97,15 @@ void loop() {
   Serial.print("La iluminacion es:");
   Serial.print(resIluminacion);
   Serial.println(" %");
+  
+  /*
+  if(resIluminacion >= 0 && resIluminacion<5){
+      Serial.println("-> Es de noche.");
+  }else if(resIluminacion < 50){
+    Serial.println("-> Poco soleado.");
+  }else{
+    Serial.println("-> Soleado.");
+  }*/
 
   acelerometro.getAceleracion(&datosAceleracion[0]);
   Serial.println("Lectura Acelerometro");

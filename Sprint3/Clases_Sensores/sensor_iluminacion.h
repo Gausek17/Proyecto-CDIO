@@ -30,6 +30,11 @@ class SensorIluminacion {
       voltajeReal = (adc0 * mvMaximo) / bitsMaximo;
       voltajeReal = voltajeReal / 1000;
       porcentajeVoltaje = (voltajeReal * 100) / 3.64;
+      if(porcentajeVoltaje >= 100){
+        porcentajeVoltaje= 100;
+      }else if(porcentajeVoltaje >= 0){
+        porcentajeVoltaje = 0;
+      }
       return porcentajeVoltaje;
     }
 };
