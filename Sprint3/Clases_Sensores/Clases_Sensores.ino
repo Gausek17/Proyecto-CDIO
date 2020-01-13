@@ -15,7 +15,7 @@
 Adafruit_ADS1115 miSensor(0x48);        // Inicializar sensor en la address 0x48
 const int MIN_HUMEDAD = 20475;      //Medimos valor en seco
 const int MAX_HUMEDAD = 10115;      //Medimos valor en agua
-const int PIN_ADC_HUMEDAD = 0;
+const int PIN_ADC_HUMEDAD = 1;
 SensorHumedad sensorHumedad;
 
 
@@ -24,7 +24,7 @@ const int POWER_PIN_SAL = 5;              // Digital I/O pin, Global variable
 const int MAX_SALINIDAD = 20000;        //Medicion con una cantidad elevada de sal
 const int MIN_SALINIDAD = 8000;            //Medicion con poca cantidad de sal
 const int MEDICIONES_SALINIDAD = 20;    //Numero de MEDICIONES_SALINIDAD
-const int PIN_ADC_SAL = 1;
+const int PIN_ADC_SAL = 0;
 SensorSalinidad sensorSalinidad;
 
 //Sensor Temperatura
@@ -65,7 +65,8 @@ void setup() {
   sensorTemperatura = SensorTemperatura(PIN_ADC_TEMPERATUA, PUNTO_CORTE, VALOR_PENDIENTE, INCREMENTO_T, MV_MAXIMO, BITS_MAXIMO, miSensor);
   sensorIluminacion = SensorIluminacion(PIN_ADC_ILUMINACION, MV_MAXIMO, BITS_MAXIMO, miSensor );
   acelerometro = SensorAcelerometro(MPU9250_ADDRESS , REGISTRO, ACC_FULL_SCALE_16_G , CALIBRACION_ACX);
-  connectWiFi();
+  configurarAlemtro();
+  //connectWiFi();
 }//setup
 
 void loop() {
@@ -75,8 +76,8 @@ void loop() {
   double resTemperatura;
   double resIluminacion;
   float datosAceleracion[14];
-
-  resHumedad = sensorHumedad.getHumedad();
+  
+  /*resHumedad = sensorHumedad.getHumedad();
   Serial.print("El nivel de humedad es del " );
   Serial.print(resHumedad);
   Serial.println(" %");
@@ -92,12 +93,21 @@ void loop() {
   Serial.print("La temperatura es: ");
   Serial.print(resTemperatura);
   Serial.println("ºC");
-
+*/
   resIluminacion = sensorIluminacion.getIluminacion();
   Serial.print("La iluminacion es:");
   Serial.print(resIluminacion);
   Serial.println(" %");
-
+  
+  
+  if(resIluminacion >= 0 && resIluminacion < 10){
+      Serial.println("-> Es de noche.");
+  }else if(resIluminacion < 30){
+    Serial.println("-> Nublado.");
+  }else{
+    Serial.println("-> Soleado.");
+  }
+/*
   acelerometro.getAceleracion(&datosAceleracion[0]);
   Serial.println("Lectura Acelerometro");
   Serial.print("AX=");
@@ -125,7 +135,7 @@ void loop() {
 
 
   HTTPGet( data, NUM_FIELDS_TO_SEND );
-
+*/
   delay(2000);
 
 }//loop
